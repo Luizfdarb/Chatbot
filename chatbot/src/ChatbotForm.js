@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ChatBotForm.css'; // Importe o arquivo de estilos
+import axios from 'axios';
 
 const ChatbotForm = () => {
   const [formData, setFormData] = useState({
@@ -35,10 +36,16 @@ const ChatbotForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Adicione lógica para enviar os dados (formData) para o backend ou realizar outras ações
-    console.log(formData);
+    try {
+      const response = await axios.post('http://localhost:3001/api/chatbot', {
+        // Enviar dados do formulário para o backend
+      });
+      console.log(response.data); // Tratar a resposta do backend, se necessário
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+    }
   };
 
   const addPrompt = () => {

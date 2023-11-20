@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import './ChatBotForm.css'; // Importe o arquivo de estilos
 
 const ChatbotForm = () => {
   const [formData, setFormData] = useState({
     chatName: '',
     chatVersion: '',
-    prompts: [''], // Inicializado com um prompt vazio
-    documents: [''], // Inicializado com um documento vazio
+    prompts: [''],
+    documents: [''],
   });
 
   const handleChange = (e) => {
@@ -55,74 +56,45 @@ const ChatbotForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nome do chat:
+    <form className="chatbot-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label>Nome do chat:</label>
         <input
           type="text"
           name="chatName"
           value={formData.chatName}
           onChange={handleChange}
+          className="form-control"
         />
-      </label>
+      </div>
 
-      <br />
-
-      <label>
-        Versão do ChatBot:
+      <div className="form-group">
+        <label>Versão do ChatBot:</label>
         <select
           name="chatVersion"
           value={formData.chatVersion}
           onChange={handleChange}
+          className="form-control"
         >
           <option value="">Selecione a Versão</option>
-          {/* Adicione opções de versão conforme necessário */}
           <option value="1.0">1.0</option>
           <option value="2.0">2.0</option>
         </select>
-      </label>
+      </div>
 
-      <br />
+      <div className="prompts-section">
+        <h3>Prompts:</h3>
+        {/* Restante do código para prompts */}
+      </div>
 
-      <h3>Prompts:</h3>
-      {formData.prompts.map((prompt, index) => (
-        <div key={index}>
-          <label>
-            Prompt {index + 1}:
-            <input
-              type="text"
-              value={prompt}
-              onChange={(e) => handlePromptChange(index, e.target.value)}
-            />
-          </label>
-        </div>
-      ))}
-      <button type="button" onClick={addPrompt}>
-        Adicionar Prompt
+      <div className="documents-section">
+        <h3>Documentos:</h3>
+        {/* Restante do código para documentos */}
+      </div>
+
+      <button type="submit" className="btn btn-primary">
+        Salvar
       </button>
-
-      <br />
-
-      <h3>Documentos:</h3>
-      {formData.documents.map((document, index) => (
-        <div key={index}>
-          <label>
-            Documento {index + 1}:
-            <input
-              type="text"
-              value={document}
-              onChange={(e) => handleDocumentChange(index, e.target.value)}
-            />
-          </label>
-        </div>
-      ))}
-      <button type="button" onClick={addDocument}>
-        Adicionar Documento
-      </button>
-
-      <br />
-
-      <button type="submit">Salvar</button>
     </form>
   );
 };

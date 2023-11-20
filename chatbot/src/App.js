@@ -11,7 +11,7 @@ function App() {
           <h2>Aqui Você pode criar e editar o seu chatbot</h2>
         </div>
       </header>
-      <ChatbotForm /> 
+       <ChatbotForm /> 
     </div>
   );
 }

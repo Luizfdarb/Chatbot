@@ -3,11 +3,13 @@
 /* Estilo para o texto principal */
 .App-header h1 {
   color: #333; /* Cor do texto (por exemplo, cinza escuro) */
+  font-size: 25px; /* Tamanho da fonte */
 }
 
 /* Estilo para o subtítulo */
 .App-header h2 {
   color: #555; /* Cor do texto (por exemplo, cinza médio) */
+  font-size: small; /* Tamanho da fonte */
 }
 
 /* Adicione mais estilos conforme necessário */

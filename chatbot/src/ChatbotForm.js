@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import './ChatBotForm.css'; // Importe o arquivo de estilos
-import axios from 'axios';
 
 const ChatbotForm = () => {
   const [formData, setFormData] = useState({
     chatName: '',
     chatVersion: '',
     prompts: [''],
-    documents: [''],
+    documents: [], // Alterado para armazenar objetos de documentos
   });
 
   const handleChange = (e) => {
@@ -38,14 +37,20 @@ const ChatbotForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:3001/api/chatbot', {
-        // Enviar dados do formulário para o backend
-      });
-      console.log(response.data); // Tratar a resposta do backend, se necessário
-    } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
-    }
+    const { chatName, chatVersion, prompts, documents } = formData;
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('chatName', chatName);
+    formDataToSend.append('chatVersion', chatVersion);
+    prompts.forEach((prompt, index) => {
+      formDataToSend.append(`prompts[${index}]`, prompt);
+    });
+    documents.forEach((document, index) => {
+      formDataToSend.append(`documents[${index}]`, document);
+    });
+
+    // Agora você pode enviar formDataToSend para o seu backend
+    // usando axios ou outra biblioteca de sua escolha
   };
 
   const addPrompt = () => {
@@ -56,10 +61,16 @@ const ChatbotForm = () => {
   };
 
   const addDocument = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      documents: [...prevData.documents, ''],
-    }));
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.txt'; // Defina os tipos de arquivo que deseja permitir
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        handleDocumentChange(formData.documents.length, file);
+      }
+    });
+    fileInput.click();
   };
 
   return (
@@ -110,7 +121,15 @@ const ChatbotForm = () => {
   
       <div className="documents-section">
         <h3>Documentos:</h3>
-        {/* Restante do código para documentos */}
+        {formData.documents.map((document, index) => (
+          <div key={index} className="form-group">
+            <label>Documento {index + 1}:</label>
+            <div>{document.name}</div>
+          </div>
+        ))}
+        <button type="button" onClick={addDocument} className="btn btn-secondary">
+          Adicionar Documento
+        </button>
       </div>
   
       <button type="submit" className="btn btn-primary">

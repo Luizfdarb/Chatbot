@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App-header {
+  text-align: left;
+}
+
+.left-content {
+  text-align: left;
+  margin-right: 20px; /* Ajuste a margem conforme necessário */
+}

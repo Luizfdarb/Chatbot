@@ -57,41 +57,55 @@ const ChatbotForm = () => {
 
   return (
     <form className="chatbot-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label>Nome do chat:</label>
-        <input
-          type="text"
-          name="chatName"
-          value={formData.chatName}
-          onChange={handleChange}
-          className="form-control"
-        />
+      <div className="form-row">
+        <div className="form-group col-md-6">
+          <label>Nome do chat:</label>
+          <input
+            type="text"
+            name="chatName"
+            value={formData.chatName}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+  
+        <div className="form-group col-md-6">
+          <label>Versão do ChatBot:</label>
+          <select
+            name="chatVersion"
+            value={formData.chatVersion}
+            onChange={handleChange}
+            className="form-control"
+          >
+            <option value="">Selecione a Versão</option>
+            <option value="1.0">1.0</option>
+            <option value="2.0">2.0</option>
+          </select>
+        </div>
       </div>
-
-      <div className="form-group">
-        <label>Versão do ChatBot:</label>
-        <select
-          name="chatVersion"
-          value={formData.chatVersion}
-          onChange={handleChange}
-          className="form-control"
-        >
-          <option value="">Selecione a Versão</option>
-          <option value="1.0">1.0</option>
-          <option value="2.0">2.0</option>
-        </select>
-      </div>
-
+  
       <div className="prompts-section">
         <h3>Prompts:</h3>
-        {/* Restante do código para prompts */}
+        {formData.prompts.map((prompt, index) => (
+          <div key={index} className="form-group">
+            <label>Prompt {index + 1}:</label>
+            <textarea
+              value={prompt}
+              onChange={(e) => handlePromptChange(index, e.target.value)}
+              className="form-control"
+            />
+          </div>
+        ))}
+        <button type="button" onClick={addPrompt} className="btn btn-secondary">
+          Adicionar Prompt
+        </button>
       </div>
-
+  
       <div className="documents-section">
         <h3>Documentos:</h3>
         {/* Restante do código para documentos */}
       </div>
-
+  
       <button type="submit" className="btn btn-primary">
         Salvar
       </button>

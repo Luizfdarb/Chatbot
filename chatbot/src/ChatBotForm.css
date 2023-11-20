@@ -1,6 +1,7 @@
 /* ChatbotForm.css */
+
 .chatbot-form {
-    max-width: 400px;
+    max-width: 1050px; /* Ajuste a largura máxima conforme necessário */
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -9,27 +10,27 @@
   }
   
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   
   .form-control {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    padding: 15px; /* Ajuste a altura dos campos de entrada */
+    margin-top: 10px;
+    margin-bottom: 15px;
     box-sizing: border-box;
   }
   
   .prompts-section,
   .documents-section {
-    margin-top: 20px;
+    margin-top: 30px;
   }
   
   .btn-primary {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 15px;
+    padding: 15px;
     cursor: pointer;
     border-radius: 5px;
   }
